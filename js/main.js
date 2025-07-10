@@ -87,6 +87,35 @@ document.addEventListener('DOMContentLoaded', function() {
       showSlide(currentSlide);
     }
   }
+
+  const finishButton = document.querySelector('.quiz-slide__finish-button');
+  if (finishButton) {
+    finishButton.addEventListener('click', function() {
+      const balanceCosts = document.querySelectorAll('.header-balance__cost');
+      balanceCosts.forEach(element => {
+        element.textContent = '60 coin';
+      });
+      
+      resetQuiz();
+    });
+  }
+  
+  function resetQuiz() {
+    currentSlide = 0;
+    showSlide(currentSlide);
+    
+    const allRadioInputs = document.querySelectorAll('input[type="radio"]');
+    allRadioInputs.forEach(input => {
+      input.checked = false;
+    });
+   
+    if (specifyInput) {
+      specifyInput.style.display = 'none';
+      specifyInput.value = '';
+    }
+    
+    updateNextButton();
+  }
 });
 
 

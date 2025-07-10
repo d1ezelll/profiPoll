@@ -507,6 +507,22 @@ header {
     font-size: 24px;
 }
 
+
+
+.quiz-slide__finish-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 120px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s;
+    background: #ffffff;
+    color: rgb(0, 0, 0);
+    display: block; /* Делаем кнопку блочным элементом */
+    margin: 0 auto; /* Центрируем по горизонтали */
+    margin-top: 20px; /* Добавляем отступ сверху */
+}
+
 .quiz-slide img {
     max-width: 282px;
     transform: scaleX(-1);
