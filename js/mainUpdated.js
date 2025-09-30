@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const BALANCE_KEY = 'user_balance';
+    const BALANCE_KEY = 'profitpoll_balance';
     const COMPLETED_SLIDES_KEY = 'completed_celebration_slides';
     
     let balance = parseInt(localStorage.getItem(BALANCE_KEY)) || 0;
